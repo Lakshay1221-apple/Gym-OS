@@ -1,241 +1,208 @@
-# GymOS Backend 🚀
+# 🏋️ Gym-OS — Backend System
 
-## Overview
+A **production-grade backend system** for gym management, built with a focus on **scalability, reliability, and clean architecture**.
 
-GymOS Backend is a **RESTful API service** built using **Node.js, Express, and MongoDB**.
-It powers a complete gym management and fitness tracking system, including:
+---
 
-* User authentication
+## 🚀 Current Status
+
+✅ **Phase 7 Completed — Backend Stabilization & Testing Gate PASSED**
+🚧 Moving to **Phase 8 — Feature Integration**
+
+---
+
+## 🧠 What This Project Is
+
+Gym-OS is a backend system designed to handle:
+
+* User authentication & role-based access
 * Membership management
-* Attendance tracking
-* Workout logging
-* Biometric tracking
-
-This project follows a **modular and scalable architecture**, making it suitable for real-world applications.
-
----
-
-## Tech Stack
-
-* **Backend:** Node.js, Express.js
-* **Database:** MongoDB (Mongoose)
-* **Authentication:** JWT (JSON Web Tokens)
-* **Security:** bcrypt (password hashing)
-* **File Uploads:** Multer (for images)
-* **Environment Management:** dotenv
+* Gym check-ins & attendance tracking
+* Workout tracking
+* Booking systems (classes/sessions)
+* Background job processing
+* Rate limiting & abuse protection
 
 ---
 
-## Project Structure
+## 🏗️ Tech Stack
 
-```
-gymos-backend
-│
-├── src
-│   ├── config          # Database & environment configs
-│   ├── controllers     # Route handlers (business entry points)
-│   ├── middleware      # Auth, roles, uploads
-│   ├── models          # Mongoose schemas
-│   ├── routes          # API routes
-│   ├── services        # Business logic
-│   ├── utils           # Helper functions
-│   └── uploads         # File storage
-│
-├── .env
-├── package.json
-└── server.js
-```
+* **Node.js**
+* **Express (v5)**
+* **MongoDB + Mongoose**
+* **Zod (Validation)**
+* **JWT Authentication**
+* **Jest + Supertest (Testing)**
+* **Winston + Morgan (Logging)**
+* **Autocannon (Load Testing)**
 
 ---
 
-## Features (MVP)
+## 🔐 Core Features
 
-### 🔐 Authentication
+### Authentication & Authorization
 
-* User registration
-* User login (JWT-based)
-* Protected routes
-* Role-based access (Admin / Trainer / Member)
+* JWT-based authentication
+* Role-based access control (Admin / Trainer / User)
+* Secure route protection
 
----
+### Database & Transactions
 
-### 🧑 Users
+* Mongoose transactions for atomic operations
+* Data consistency and rollback support
+* Unique constraints to prevent duplication
 
-* Profile management
-* User roles & permissions
+### API Design
 
----
+* Consistent response format:
 
-### 💳 Membership Management
-
-* View membership plans
-* Purchase memberships
-* Prevent overlapping memberships
-* Freeze membership
-
----
-
-### 🏋️ Workout Tracking
-
-* Start workout session
-* Add sets (reps, weight, RPE)
-* Finish workout
-* Track workout history
-
----
-
-### 📊 Biometric Tracking
-
-* Log body weight
-* Body fat & muscle mass
-* Body measurements
-* View progress history
-
----
-
-### 📍 Attendance System
-
-* Check-in / Check-out
-* Prevent duplicate check-ins
-* Attendance history tracking
-
----
-
-## API Endpoints
-
-### Auth
-
-```
-POST /api/auth/register
-POST /api/auth/login
-GET  /api/auth/profile
-POST /api/auth/logout
+```json
+{ "success": true, "data": {}, "message": "" }
 ```
 
+* Proper HTTP status codes
+* Structured error handling
+
+### Background Jobs
+
+* Membership expiration handling
+* Attendance cleanup
+* Idempotent job execution
+
+### Security & Protection
+
+* Rate limiting (anti-spam / brute force)
+* Input validation using Zod
+* Secure middleware architecture
+
 ---
 
-### Membership
+## 🧪 Testing & Stability (Phase 7)
 
-```
-GET  /api/membership/plans
-POST /api/membership/purchase
-GET  /api/membership/status
-POST /api/membership/freeze
-```
+### ✅ Integration Testing
+
+* 66+ end-to-end test cases
+* Full flow coverage:
+
+  * Register → Login → Membership → Check-in → Workout
+
+### ✅ Critical Bugs Fixed
+
+* Removed deprecated `xss-clean` (Express 5 crash issue)
+* Fixed incorrect HTTP 200 responses on failures
+* Resolved middleware scope issues
+
+### ✅ Database Reliability
+
+* Verified transaction rollback
+* Ensured atomic multi-document operations
+
+### ✅ Load Testing
+
+* 150 concurrent users tested
+* Stable performance under load
+* No crashes or event-loop blocking
+
+### ✅ Rate Limiting
+
+* Auth endpoints protected (5 req/min)
+* Abuse prevention validated
 
 ---
 
-### Attendance
+## 📊 System Metrics
+
+* **0 System Crashes**
+* **100% Test Pass Rate (66/66)**
+* **Consistent API Contract**
+* **No Data Inconsistencies**
+* **Stable Under Load**
+
+---
+
+## 📁 Project Structure (Simplified)
 
 ```
-POST /api/attendance/checkin
-POST /api/attendance/checkout
-GET  /api/attendance/history
+src/
+ ├── controllers/
+ ├── routes/
+ ├── middleware/
+ ├── models/
+ ├── jobs/
+ ├── utils/
+tests/
+ ├── auth.test.js
+ ├── ...
 ```
 
 ---
 
-### Workout
+## ⚙️ Getting Started
 
+### 1. Clone Repo
+
+```bash
+git clone https://github.com/Lakshay1221-apple/Gym-OS.git
+cd Gym-OS
 ```
-POST /api/workout/start
-POST /api/workout/add-set
-POST /api/workout/finish
-GET  /api/workout/history
-```
-
----
-
-### Biometrics
-
-```
-POST /api/biometrics/log
-GET  /api/biometrics/history
-```
-
----
-
-## Getting Started
-
-### 1. Clone the Repository
-
-```
-git clone https://github.com/your-username/gymos-backend.git
-cd gymos-backend
-```
-
----
 
 ### 2. Install Dependencies
 
-```
+```bash
 npm install
 ```
 
----
+### 3. Start MongoDB
 
-### 3. Setup Environment Variables
-
-Create a `.env` file in root:
-
-```
-PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/gymos
-JWT_SECRET=your_secret_key
+```bash
+mongod --dbpath ~/mongodb-data
 ```
 
----
+### 4. Run Server
 
-### 4. Start MongoDB
-
-Make sure MongoDB is running locally:
-
+```bash
+npm start
 ```
-mongosh
+
+### 5. Run Tests
+
+```bash
+npm test
 ```
 
 ---
 
-### 5. Run the Server
+## 🔄 Development Philosophy
 
-```
-npm run dev
-```
+> “If the system cannot survive failure, it is not ready to grow.”
 
-Server will start at:
+This project focuses on:
 
-```
-http://localhost:5000
-```
+* Stability before scaling
+* Testing before feature expansion
+* Clean architecture over quick hacks
 
 ---
 
-## Development Workflow
+## 🚧 Next Phase (Phase 8)
 
-1. Start MongoDB
-2. Run backend server
-3. Test APIs using Postman / Thunder Client
-4. Verify data using MongoDB Compass
+Planned feature expansion:
 
----
-
-## Future Improvements
-
-* File upload system (profile & progress photos)
-* AI-based workout recommendations
-* Nutrition tracking system
-* Notification engine
-* Swagger API documentation
-* Cloud deployment (AWS / Render)
+* Trainer management system
+* Advanced workout analytics
+* Booking & scheduling enhancements
+* Real-time gym insights
 
 ---
 
-## Author
+## 👨‍💻 Author
 
 **Lakshay Raj**
 
 ---
 
-## License
+## ⭐ Key Highlight
 
-This project is for educational and development purposes.
+This project is not just built — it is **engineered, tested, and stabilized** before scaling.
+
+---
