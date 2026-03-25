@@ -9,12 +9,19 @@ const {
     loginUser,
     getUserProfile,
     logoutUser,
+    refreshTokenUser,
+    requestPasswordReset,
+    confirmPasswordReset,
 } = require("../controllers/authController");
 const { protect } = require("../middleware/authMiddleware");
+const { authLoginLimiter, authRegisterLimiter, authResetLimiter } = require("../middleware/rateLimiter");
 
-router.post("/register", validateRequest(registerSchema), registerUser);
-router.post("/register-gym", registerTenant);
-router.post("/login", validateRequest(loginSchema), loginUser);
+router.post("/register", authRegisterLimiter, validateRequest(registerSchema), registerUser);
+router.post("/register-gym", authRegisterLimiter, registerTenant);
+router.post("/login", authLoginLimiter, validateRequest(loginSchema), loginUser);
+router.post("/refresh", refreshTokenUser);
+router.post("/password-reset-request", authResetLimiter, requestPasswordReset);
+router.post("/password-reset-confirm", authResetLimiter, confirmPasswordReset);
 router.post("/logout", protect, logoutUser);
 router.route("/profile").get(protect, getUserProfile);
 

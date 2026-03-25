@@ -144,7 +144,7 @@ const cancelMembership = async (req, res) => {
 module.exports = {
     // Plans
     getPlans, createPlan, updatePlan, deletePlan,
-    
+
     // Subscriptions
     purchaseMembership, getMemberMembership, getAllMemberships, cancelMembership
 };

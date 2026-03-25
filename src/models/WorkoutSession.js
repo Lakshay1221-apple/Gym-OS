@@ -33,6 +33,9 @@ const workoutSessionSchema = new mongoose.Schema(
         caloriesBurned: {
             type: Number,
         },
+        totalVolume: {
+            type: Number,
+        },
     },
     {
         timestamps: true,

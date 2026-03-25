@@ -31,10 +31,6 @@ const measurementSchema = new mongoose.Schema(
         thighs: {
             type: Number,
         },
-        date: {
-            type: Date,
-            default: Date.now,
-        },
     },
     {
         timestamps: true,

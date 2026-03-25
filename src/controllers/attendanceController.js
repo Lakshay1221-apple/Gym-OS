@@ -100,10 +100,10 @@ const getMemberAttendance = asyncHandler(async (req, res) => {
 // @access  Private/Admin/Trainer
 const getDailyAttendance = asyncHandler(async (req, res) => {
     const today = new Date();
-    today.setHours(0, 0, 0, 0); 
-    
+    today.setHours(0, 0, 0, 0);
+
     const tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1); 
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     const dailyLogs = await Attendance.find({
         gym: req.user.gym,
@@ -125,4 +125,3 @@ module.exports = {
     getMemberAttendance,
     getDailyAttendance,
 };
-

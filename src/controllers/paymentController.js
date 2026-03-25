@@ -12,12 +12,12 @@ const createPayment = async (req, res) => {
 
     try {
         const payment = await processPaymentAndSubscribe(
-            memberId, 
-            planId, 
-            amount, 
-            currency, 
-            method, 
-            req.user.gym, 
+            memberId,
+            planId,
+            amount,
+            currency,
+            method,
+            req.user.gym,
             req.user._id
         );
 

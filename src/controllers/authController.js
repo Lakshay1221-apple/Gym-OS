@@ -62,7 +62,7 @@ const registerTenant = asyncHandler(async (req, res) => {
         name: ownerName,
         email: ownerEmail,
         password: ownerPassword,
-        role: "admin", 
+        role: "admin",
         gym: new mongoose.Types.ObjectId()
     });
 

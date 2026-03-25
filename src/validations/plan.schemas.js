@@ -15,6 +15,14 @@ const createPlanSchema = z.object({
     }),
 });
 
+const purchaseMembershipSchema = z.object({
+    body: z.object({
+        memberId: objectIdSchema,
+        planId: objectIdSchema,
+    }),
+});
+
 module.exports = {
     createPlanSchema,
+    purchaseMembershipSchema,
 };

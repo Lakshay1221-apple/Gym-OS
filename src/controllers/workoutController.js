@@ -102,7 +102,7 @@ const finishSession = async (req, res) => {
 
         session.endTime = endTime;
         session.duration = durationMinutes;
-        
+
         if (caloriesBurned) {
             session.caloriesBurned = caloriesBurned;
         }

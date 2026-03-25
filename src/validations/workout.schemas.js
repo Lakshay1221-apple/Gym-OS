@@ -39,8 +39,18 @@ const startSessionAssignmentSchema = z.object({
     }),
 });
 
+const addSetSchema = z.object({
+    body: z.object({
+        sessionId: objectIdSchema,
+        exerciseId: objectIdSchema,
+        reps: z.number().int().positive("reps > 0 required"),
+        weight: z.number().nonnegative("weight >= 0 required"),
+    }),
+});
+
 module.exports = {
     createProgramSchema,
     assignProgramSchema,
     startSessionAssignmentSchema,
+    addSetSchema,
 };

@@ -1,0 +1,6 @@
+00:54:13 [31merror[39m: MongoDB connection failed: connect ECONNREFUSED 127.0.0.1:27018
+MongooseServerSelectionError: connect ECONNREFUSED 127.0.0.1:27018
+    at _handleConnectionErrors (/home/lr/GymOS/node_modules/mongoose/lib/connection.js:1168:11)
+    at NativeConnection.openUri (/home/lr/GymOS/node_modules/mongoose/lib/connection.js:1099:11)
+    at async connectDB (/home/lr/GymOS/src/config/db.js:11:22)
+    at async startServer (/home/lr/GymOS/server.js:14:5)

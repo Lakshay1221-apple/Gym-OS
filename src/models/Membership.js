@@ -34,8 +34,11 @@ const membershipSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ["pending", "active", "grace", "expired", "cancelled"],
+            enum: ["pending", "active", "grace", "expired", "cancelled", "frozen"],
             default: "active",
+        },
+        freezeDate: {
+            type: Date,
         },
         createdBy: {
             type: mongoose.Schema.Types.ObjectId,
